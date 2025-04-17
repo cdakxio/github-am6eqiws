@@ -12,6 +12,16 @@ import Wallets from './pages/Wallets';
 import Transactions from './pages/Transactions';
 import Loras from './pages/Loras';
 import FactureDemi from './pages/FactureDemi';
+import NouvellePage from './pages/formations/NouvellePage';
+import ListePage from './pages/formations/ListePage';
+import Formateurs from './pages/Formateurs';
+import Parametres from './pages/Parametres';
+import NouveauParticipant from './pages/participants/NouvellePage';
+import ListeParticipants from './pages/participants/ListePage';
+import EditParticipant from './pages/participants/EditPage';
+import NouveauLieu from './pages/lieux/NouvellePage';
+import ListeLieux from './pages/lieux/ListePage';
+import ListeEmails from './pages/emails/ListePage';
 
 function App() {
   return (
@@ -35,6 +45,22 @@ function App() {
               <Route path="transactions" element={<Transactions />} />
               <Route path="loras" element={<Loras />} />
               <Route path="factures" element={<FactureDemi />} />
+              <Route path="formations/nouvelle" element={<NouvellePage />} />
+              <Route path="formations/liste" element={<ListePage />} />
+              <Route path="formateurs/*" element={<Formateurs />} />
+              <Route path="parametres" element={<Parametres />} />
+              <Route path="participants">
+                <Route path="nouveau" element={<NouveauParticipant />} />
+                <Route path="liste" element={<ListeParticipants />} />
+                <Route path="edit/:id" element={<EditParticipant />} />
+              </Route>
+              <Route path="lieux">
+                <Route path="nouveau" element={<NouveauLieu />} />
+                <Route path="liste" element={<ListeLieux />} />
+              </Route>
+              <Route path="emails">
+                <Route path="liste" element={<ListeEmails />} />
+              </Route>
             </Route>
           </Routes>
         </AuthProvider>

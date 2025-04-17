@@ -5,12 +5,24 @@ export interface Notification {
   message: string;
   type: 'info' | 'success' | 'error';
   timestamp: Date;
-  data?: any; // For storing additional data related to the notification
+  data?: {
+    table?: string;
+    action?: string;
+    details?: string;
+  };
 }
 
 interface NotificationContextType {
   notifications: Notification[];
-  addNotification: (message: string, type: 'info' | 'success' | 'error', data?: any) => void;
+  addNotification: (
+    message: string, 
+    type: 'info' | 'success' | 'error',
+    data?: {
+      table?: string;
+      action?: string;
+      details?: string;
+    }
+  ) => void;
   dismissNotification: (id: string) => void;
 }
 
@@ -19,7 +31,15 @@ const NotificationContext = createContext<NotificationContextType | undefined>(u
 export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [notifications, setNotifications] = useState<Notification[]>([]);
 
-  const addNotification = useCallback((message: string, type: 'info' | 'success' | 'error' = 'info', data?: any) => {
+  const addNotification = useCallback((
+    message: string, 
+    type: 'info' | 'success' | 'error' = 'info',
+    data?: {
+      table?: string;
+      action?: string;
+      details?: string;
+    }
+  ) => {
     const newNotification: Notification = {
       id: Date.now().toString(),
       message,
